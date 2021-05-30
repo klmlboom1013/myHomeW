@@ -3,18 +3,23 @@
 <head>
     <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="utf-8">
-    <title>Promises with fetch</title>
+    <title>Transforming Data</title>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
-<h1>Promises with fetch</h1>
-<p>Open the console</p>
+<h1>Transforming Data</h1>
+<p>Open the Console</p>
 <script type="text/babel">
 
-    fetch("https://api.randomuser.me/?nat=US&results=10")
-      .then(response => response.json())
-      .then(members => console.log(members))
-      .catch(err => console.error(err))
+    const schools = [
+        "Yorktown",
+        "Washington & Lee",
+        "Wakefield"
+    ]
+
+    console.log( schools.join(", ") )
+
+
 </script>
 </body>
 </html>
