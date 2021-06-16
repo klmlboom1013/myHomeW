@@ -2,7 +2,8 @@
   "name": "express-tutorial",
   "version": "1.0.0",
   "dependencies": {
+    "ejs": "~2.4.1",
     "express": "~4.13.1",
-    "ejs": "~2.4.1"
+    "jshint": "^2.13.0"
   }
 }
