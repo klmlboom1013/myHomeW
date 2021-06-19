@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 
 const main = require('./router/main')(app);
-const chapter2 = require('./router/chapter02')(app);
-const test = require('./router/test')(app); 
-const objectTest = require('./router/objectTest')(app); 
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
