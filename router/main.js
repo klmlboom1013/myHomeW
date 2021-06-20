@@ -23,7 +23,7 @@ module.exports = (app, fs) => {
       app.post('/addUser/:userseq', (req, res) => {
             let result = {  };
             let userseq = req.params.userseq;
-    
+
             // CHECK REQ VALIDITY
             if(!req.body['password'] || !req.body['name']){
                 result['success'] = 0;
@@ -55,6 +55,9 @@ module.exports = (app, fs) => {
       });
 
       app.put('/updateUser/:userseq', (req, res) => {
+
+            
+
             let result = {  };
             let userseq = req.params.userseq;
     
