@@ -1,8 +1,12 @@
 module.exports = (app, fs) => {
       app.get('/', (req,res) => {
+            let sess = req.session;
+
             res.render('index', {
                   title: 'MY HOMEPAGE',
-                  length: 7
+                  length: 7,
+                  name: sess.name,
+                  userseq: sess.userseq
             });
       });
 
@@ -55,9 +59,6 @@ module.exports = (app, fs) => {
       });
 
       app.put('/updateUser/:userseq', (req, res) => {
-
-            
-
             let result = {  };
             let userseq = req.params.userseq;
     
@@ -108,5 +109,49 @@ module.exports = (app, fs) => {
                         res.json(result);
                   });
             });
+      });
+
+      app.get('/login/:userseq/:password', (req, res) => {
+            let sess = req.session;
+
+            fs.readFile(__dirname + '/../data/user.json', 'utf8', (err, data) => {
+                  let users = JSON.parse(data);
+                  let userseq = req.params.userseq;
+                  let password = req.params.password;
+                  let result = {  };
+                  if(!users[userseq]){
+                        // userseq NOT FOUND
+                        result['success'] = 0;
+                        result['error'] = 'not found';
+                        res.json(result);
+                        return;
+                  }
+    
+                  if(users[userseq]['password'] == password){
+                        result['success'] = 1;
+                        sess.userseq = userseq;
+                        sess.name = users[userseq]['name'];
+                        res.json(result);
+                  }else{
+                        result['success'] = 0;
+                        result['error'] = 'incorrect';
+                        res.json(result);
+                  }
+            });
+      });
+
+      app.get('/logout', function(req, res){
+            let sess = req.session;
+            if(sess.username){
+                  req.session.destroy(function(err){
+                        if(err){
+                              console.log(err);
+                        }else{
+                              res.redirect('/');
+                        }
+                  });
+            } else {
+                  res.redirect('/');
+            }
       });
 };
