@@ -1,3 +1,4 @@
+/* jshint -W069 */
 module.exports = (app, fs) => {
       app.get('/', (req,res) => {
             let sess = req.session;
